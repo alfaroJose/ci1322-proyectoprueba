@@ -13,8 +13,11 @@ public class School {
     @Id
     @Column(name = "Name", nullable = false, length = 150)
     private String Name;
+
     private List<Teacher> teachers;
+
     private List<Student> students;
+
     private List<Course> courses;
 
     public School() {
