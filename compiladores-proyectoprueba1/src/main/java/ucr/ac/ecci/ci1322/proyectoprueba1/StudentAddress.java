@@ -1,15 +1,12 @@
 package ucr.ac.ecci.ci1322.proyectoprueba1;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "StudentAddress")
 public class StudentAddress {
     @Id
-    @Column(name = "studentID", nullable = false, length = 150)
+    @Column(name = "addressId", nullable = false, length = 100)
     private String studentID;
     @Column(name = "address", nullable = false)
     private String address;
@@ -17,12 +14,15 @@ public class StudentAddress {
     private String country;
     @Column(name = "city", nullable = true, length = 150)
     private String city;
+    @OneToOne(mappedBy = "Student")
+    private Student owner;
 
     public StudentAddress() {
         studentID = "";
         address = "";
         country = "";
         city = "";
+        owner = null;
     }
 
     public String getStudentID() {
@@ -56,4 +56,8 @@ public class StudentAddress {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public Student getOwner() { return owner; }
+
+    public void setOwner(Student owner) { this.owner = owner; }
 }

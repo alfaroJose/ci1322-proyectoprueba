@@ -1,9 +1,6 @@
 package ucr.ac.ecci.ci1322.proyectoprueba1;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +10,16 @@ public class Teacher {
     @Id
     @Column(name = "teacherID", nullable = false, length = 150)
     private String teacherID;
+    @ManyToOne
+    @JoinColumn(name="name", nullable=false)
     private School school;
+    @Column(name = "teacherId", nullable = false)
     private String teacherType;
     @Column(name = "salary")
     private double salary;
     @Column(name = "gender", nullable = false, length = 50)
     private String gender;
+    @OneToMany(mappedBy="Teacher")
     private List<Course> courses;
 
     public Teacher() {

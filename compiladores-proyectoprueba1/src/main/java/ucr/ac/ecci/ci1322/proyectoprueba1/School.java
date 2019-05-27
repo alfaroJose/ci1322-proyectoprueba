@@ -1,9 +1,6 @@
 package ucr.ac.ecci.ci1322.proyectoprueba1;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,17 +8,18 @@ import java.util.List;
 @Table(name = "School")
 public class School {
     @Id
-    @Column(name = "Name", nullable = false, length = 150)
-    private String Name;
-
+    @Column(name = "name", nullable = false, length = 150)
+    private String name;
+    @OneToMany(mappedBy="School")
     private List<Teacher> teachers;
-
+    @OneToMany(mappedBy="Student")
     private List<Student> students;
-
+    @ManyToOne
+    @JoinColumn(name="courseId", nullable=false)
     private List<Course> courses;
 
     public School() {
-        Name = "";
+        name = "";
         this.teachers = new ArrayList<>();
         this.students = new ArrayList<>();
         this.courses = new ArrayList<>();
@@ -40,11 +38,11 @@ public class School {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public List<Teacher> getTeachers() {

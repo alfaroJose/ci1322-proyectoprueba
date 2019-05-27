@@ -1,9 +1,6 @@
 package ucr.ac.ecci.ci1322.proyectoprueba1;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +8,14 @@ import java.util.List;
 @Table(name = "Course")
 public class Course {
     @Id
-    @Column(name = "courseID", nullable = false, length = 150)
+    @Column(name = "courseId", nullable = false, length = 150)
     private String courseID;
     @Column(name = "courseName", nullable = false, length = 200)
     private String courseName;
+    @ManyToOne()
+    @JoinColumn(name="teacherId", nullable=false)
     private Teacher teacher;
+
     private List<Student> students;
 
     public Course() {
